@@ -7,4 +7,5 @@ export interface QuoteResponse {
   o: Number;
   l: Number;
   t: Number;
+  name?: string;
 }

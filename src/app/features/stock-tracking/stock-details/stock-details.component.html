@@ -1,1 +1,26 @@
-<p>stock-details works!</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Name here {{ currentQuoteSentiment?.name }}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm">
+        First month
+
+        <app-stock-month-sentiment></app-stock-month-sentiment>
+      </div>
+      <div class="col-sm">
+        <app-stock-month-sentiment></app-stock-month-sentiment>
+      </div>
+
+      <div class="col-sm">
+        <app-stock-month-sentiment></app-stock-month-sentiment>
+      </div>
+    </div>
+
+    <button type="button" id="btnSave" class="btn btn-primary pull-right">
+      Back to list of stocks
+    </button>
+  </div>
+</div>
+>

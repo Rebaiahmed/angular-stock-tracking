@@ -8,9 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StockListComponent } from './stock-list/stock-list.component';
 import { StockQuoteComponent } from './stock-quote/stock-quote.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
+import { StockMonthSentimentComponent } from './stock-month-sentiment/stock-month-sentiment.component';
 
 @NgModule({
-  declarations: [StockRootComponent, StockTrackerComponent, StockListComponent, StockQuoteComponent, StockDetailsComponent],
+  declarations: [StockRootComponent, StockTrackerComponent, StockListComponent, StockQuoteComponent, StockDetailsComponent, StockMonthSentimentComponent],
   imports: [CommonModule, ReactiveFormsModule, StockTrackingRoutingModule],
 })
 export class StockTrackingModule {}

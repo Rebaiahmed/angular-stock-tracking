@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { QuoteResponse } from '../models/quote';
+import { QuoteResponse, Stock, StockApiResponse } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +13,14 @@ export class StockService {
     this.apiUrl = `${environment.apiURL}`;
   }
 
-  getCompanyName(searchString: string): Observable<string> {
+  getCompanyName(searchString: string): Observable<Stock[]> {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('q', searchString);
     return this.http
-      .get<string>(this.apiUrl + '/search', {
+      .get<StockApiResponse>(this.apiUrl + '/search', {
         params: queryParams,
       })
-      .pipe
-      // map(response => response.body)
-      ();
+      .pipe(map((response) => response.result));
   }
 
   getCompanyCurrentQuotes(symbol: string): Observable<QuoteResponse> {
