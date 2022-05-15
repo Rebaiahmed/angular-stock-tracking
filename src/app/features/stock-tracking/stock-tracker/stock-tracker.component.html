@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <p>Enter the symbol of the stock to track</p>
+  </div>
+
+  <div class="input-group">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" [formControl]="stockSearcher" />
+
+      <br />
+
+      <small class="text-danger" *ngIf="stockSearcher.hasError('maxlength')">
+        The maximum length for this search form is 5 characters
+      </small>
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        [disabled]="!stockSearcher.valid"
+        (click)="trackStock()"
+      >
+        Track stock
+      </button>
+    </div>
+  </div>
+</div>
