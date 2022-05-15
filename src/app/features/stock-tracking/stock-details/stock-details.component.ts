@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-stock-details',
@@ -12,7 +14,11 @@ export class StockDetailsComponent implements OnInit {
     this.currentQuoteSentiment = value;
   }
 
-  constructor() {}
+  constructor(private location: Location) {}
 
   ngOnInit(): void {}
+
+  backToListStock(): void {
+    this.location.back();
+  }
 }

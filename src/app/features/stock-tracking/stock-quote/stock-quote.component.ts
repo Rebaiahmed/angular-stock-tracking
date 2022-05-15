@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QuoteResponse } from '../../../core/models';
 
 @Component({
@@ -13,7 +14,11 @@ export class StockQuoteComponent implements OnInit {
     this.currentQuoteValue = value;
   }
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  navigateToStockDetails(): void {
+    this.router.navigate(['/sentiment/' + this.currentQuoteValue?.name]);
+  }
 }
