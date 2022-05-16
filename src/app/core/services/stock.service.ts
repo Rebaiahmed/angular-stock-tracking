@@ -13,9 +13,9 @@ export class StockService {
     this.apiUrl = `${environment.apiURL}`;
   }
 
-  getCompanyName(searchString: string): Observable<Stock[]> {
+  getMatchedCompanies(searchValue: string): Observable<Stock[]> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append('q', searchString);
+    queryParams = queryParams.append('q', searchValue);
     return this.http
       .get<StockApiResponse>(this.apiUrl + '/search', {
         params: queryParams,

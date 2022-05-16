@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
-const APP_PREFIX = 'ANMS-';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
+  SYMBOLS_KEY = 'stocks';
   constructor() {}
 
   loadInitialState(): void {}
 
   setItem(key: string, value: any) {
-    localStorage.setItem(`${APP_PREFIX}${key}`, JSON.stringify(value));
+    localStorage.setItem(`${key}`, JSON.stringify(value));
   }
 
-  getItem(key: string) {
-    return JSON.parse(localStorage.getItem(`${APP_PREFIX}${key}`) || '{}');
+  getStocks() {
+    return JSON.parse(localStorage.getItem(`${this.SYMBOLS_KEY}`) || '[]');
   }
 
   removeItem(key: string) {
-    localStorage.removeItem(`${APP_PREFIX}${key}`);
+    localStorage.removeItem(`${key}`);
+  }
+
+  addEntry(newSymbol: string) {
+    let existingEntries = this.getStocks();
+    existingEntries.push(newSymbol);
+    localStorage.setItem(this.SYMBOLS_KEY, JSON.stringify(existingEntries));
   }
 }
