@@ -9,6 +9,7 @@ import { StockQuoteComponent } from './stock-quote/stock-quote.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { StockMonthSentimentComponent } from './stock-month-sentiment/stock-month-sentiment.component';
 import { SharedModule } from '../../shared/shared.module';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from '../../shared/shared.module';
     ReactiveFormsModule,
     StockTrackingRoutingModule,
     SharedModule,
+    CoreModule,
   ],
 })
 export class StockTrackingModule {}

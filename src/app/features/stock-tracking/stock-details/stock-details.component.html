@@ -4,11 +4,11 @@
       <h3 class="panel-title">Name here params route</h3>
     </div>
     <div class="panel-body">
-      <div
-        class="row"
-        *ngFor="let sentiment of currentQuoteSentiment?.data; let i = index"
-      >
-        <div class="col-sm">
+      <div class="row">
+        <div
+          class="col-sm"
+          *ngFor="let sentiment of currentQuoteSentiment?.data; let i = index"
+        >
           <app-stock-month-sentiment
             [monthlySentimentValue]="sentiment"
           ></app-stock-month-sentiment>
