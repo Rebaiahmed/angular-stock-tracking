@@ -20,7 +20,7 @@ export class StockTrackerComponent implements OnInit {
   ngOnInit(): void {}
 
   trackStock(): void {
-    this.localStorageService.addEntry(this.stockSearcher.value);
+    this.localStorageService.addNewStock(this.stockSearcher.value);
     this.symbolEvent$.emit(this.stockSearcher.value);
   }
 }

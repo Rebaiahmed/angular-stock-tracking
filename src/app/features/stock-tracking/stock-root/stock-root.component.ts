@@ -1,19 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  concatMap,
-  forkJoin,
-  map,
-  mergeMap,
-  Observable,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
-import { QuoteResponse, Stock } from '../../../core/models';
+import { forkJoin, map, Subject, takeUntil, tap } from 'rxjs';
+import { QuoteResponse } from '../../../core/models';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { StockService } from '../../../core/services/stock.service';
-
-const symbols = ['1', '2', '3', '4'];
 
 @Component({
   selector: 'app-stock-root',
@@ -21,25 +10,42 @@ const symbols = ['1', '2', '3', '4'];
   styleUrls: ['./stock-root.component.scss'],
 })
 export class StockRootComponent implements OnInit {
-  stocks$: Observable<QuoteResponse[]>;
+  private destroy$ = new Subject<void>();
+  stocks: QuoteResponse[] = [];
 
   constructor(
     private readonly stockService: StockService,
     private readonly localStorageService: LocalStorageService
   ) {}
 
-  getRecentSymbolValue(symbol: any) {
-    this.stockService.getCompanyCurrentQuotes(symbol).subscribe((result) => {
-      console.log('result', result);
-    });
+  ngOnInit(): void {
+    this.getStocksData();
   }
 
-  ngOnInit(): void {
+  getStocksData() {
     let stocks = this.localStorageService.getStocks();
-    this.stocks$ = of(
+    forkJoin(
       stocks.map((stockSymbol: string) => {
         return this.stockService.getCompanyCurrentQuotes(stockSymbol);
       })
-    );
+    )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result: QuoteResponse[]) => {
+        this.stocks = result;
+      });
+  }
+
+  trackByFn(index, item) {
+    return index;
+  }
+
+  removeStock(symbol) {
+    this.localStorageService.removeStock(symbol);
+    this.getStocksData();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

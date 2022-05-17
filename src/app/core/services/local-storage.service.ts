@@ -17,11 +17,16 @@ export class LocalStorageService {
     return JSON.parse(localStorage.getItem(`${this.SYMBOLS_KEY}`) || '[]');
   }
 
-  removeItem(key: string) {
-    localStorage.removeItem(`${key}`);
+  removeStock(symbol: string) {
+    let existingEntries = this.getStocks();
+    let index = existingEntries.indexOf(symbol);
+    if (index !== -1) {
+      existingEntries.splice(index, 1);
+    }
+    localStorage.setItem(this.SYMBOLS_KEY, JSON.stringify(existingEntries));
   }
 
-  addEntry(newSymbol: string) {
+  addNewStock(newSymbol: string) {
     let existingEntries = this.getStocks();
     existingEntries.push(newSymbol);
     localStorage.setItem(this.SYMBOLS_KEY, JSON.stringify(existingEntries));

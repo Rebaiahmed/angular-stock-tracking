@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuoteResponse } from '../../../core/models';
 
@@ -8,6 +8,7 @@ import { QuoteResponse } from '../../../core/models';
   styleUrls: ['./stock-quote.component.scss'],
 })
 export class StockQuoteComponent implements OnInit {
+  @Output() removeStockEvent = new EventEmitter<string>();
   currentQuoteValue?: QuoteResponse;
 
   @Input() set quoteValue(value: QuoteResponse) {
@@ -20,5 +21,9 @@ export class StockQuoteComponent implements OnInit {
 
   navigateToStockDetails(): void {
     this.router.navigate(['/sentiment/' + this.currentQuoteValue?.name]);
+  }
+
+  removeItem(): void {
+    this.removeStockEvent.emit(this.currentQuoteValue.symbol);
   }
 }

@@ -1,10 +1,11 @@
 <div class="container">
-  <app-stock-tracker
-    (symbolEvent$)="getRecentSymbolValue($event)"
-  ></app-stock-tracker>
+  <app-stock-tracker></app-stock-tracker>
   <router-outlet></router-outlet>
 
-  <div *ngFor="let stockQuote of stocks$ | async">
-    <app-stock-quote [quoteValue]="stockQuote"></app-stock-quote>
+  <div *ngFor="let stockQuote of stocks; trackBy: trackByFn">
+    <app-stock-quote
+      [quoteValue]="stockQuote"
+      (removeStockEvent)="removeStock($event)"
+    ></app-stock-quote>
   </div>
 </div>

@@ -1,11 +1,12 @@
 export interface QuoteResponse {
-  c: Number;
-  d: Number;
-  dp: Number;
-  h: Number;
-  pc: Number;
-  o: Number;
-  l: Number;
-  t: Number;
+  c: number;
+  d: number;
+  dp: number;
+  h: number;
+  pc: number;
+  o: number;
+  l: number;
+  t: number;
   name?: string;
+  symbol?: string;
 }
