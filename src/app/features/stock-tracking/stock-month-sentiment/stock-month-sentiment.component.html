@@ -1,13 +1,17 @@
 <div>
   <div class="row">
     <div class="col-sm">
-      <p>MOnth</p>
+      <p>{{ monthlySentiment?.month }}</p>
 
-      <p>change</p>
+      <p>{{ monthlySentiment?.change }}</p>
 
-      <p>MSPR value</p>
+      <p>{{ monthlySentiment?.mspr }}</p>
     </div>
 
-    <div class="col-sm">houni flech!</div>
+    <div class="col-sm">
+      <!--   <app-arrow-indicator
+        [currentIndicatorValue]="monthlySentiment.change"
+      ></app-arrow-indicator> -->
+    </div>
   </div>
 </div>

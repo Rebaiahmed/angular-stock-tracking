@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { forkJoin, map, Subject, takeUntil, tap } from 'rxjs';
 import { QuoteResponse } from '../../../core/models';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
@@ -15,18 +15,29 @@ export class StockRootComponent implements OnInit {
 
   constructor(
     private readonly stockService: StockService,
-    private readonly localStorageService: LocalStorageService
+    private readonly localStorageService: LocalStorageService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.getStocksData();
   }
 
+  getRecentSymbolValue(stockSymbol: string) {
+    this.stockService
+      .getCompanyCurrentQuote(stockSymbol)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
+        console.log('new quote', result);
+      });
+    this.ngOnInit();
+  }
+
   getStocksData() {
     let stocks = this.localStorageService.getStocks();
     forkJoin(
       stocks.map((stockSymbol: string) => {
-        return this.stockService.getCompanyCurrentQuotes(stockSymbol);
+        return this.stockService.getCompanyCurrentQuote(stockSymbol);
       })
     )
       .pipe(takeUntil(this.destroy$))
@@ -42,6 +53,8 @@ export class StockRootComponent implements OnInit {
   removeStock(symbol) {
     this.localStorageService.removeStock(symbol);
     this.getStocksData();
+    this.cdr.detectChanges();
+    this.ngOnInit();
   }
 
   ngOnDestroy() {

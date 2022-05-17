@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { QuoteResponse, StockApiResponse } from '../models';
+import { SentimentDataResponse } from '../models/sentiment-data';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class StockService {
       .pipe(map((response) => response.result[0].displaySymbol));
   }
 
-  getCompanyCurrentQuotes(symbol: string): Observable<QuoteResponse> {
+  getCompanyCurrentQuote(symbol: string): Observable<QuoteResponse> {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('symbol', symbol);
     return this.http
@@ -35,5 +36,22 @@ export class StockService {
           return { ...response, symbol: symbol };
         })
       );
+  }
+
+  getStockSentimentData(
+    symbol: string,
+    from: string,
+    to: string
+  ): Observable<SentimentDataResponse> {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('symbol', symbol);
+    queryParams = queryParams.append('from', ' 2020-03-15');
+    queryParams = queryParams.append('to', '2020-06-15');
+    return this.http.get<SentimentDataResponse>(
+      this.apiUrl + '/stock/insider-sentiment',
+      {
+        params: queryParams,
+      }
+    );
   }
 }

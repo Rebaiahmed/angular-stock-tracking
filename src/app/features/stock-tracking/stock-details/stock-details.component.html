@@ -1,20 +1,16 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Name here {{ currentQuoteSentiment?.name }}</h3>
+    <h3 class="panel-title">Name here params route</h3>
   </div>
   <div class="panel-body">
-    <div class="row">
+    <div
+      class="row"
+      *ngFor="let sentiment of currentQuoteSentiment?.data; let i = index"
+    >
       <div class="col-sm">
-        First month
-
-        <app-stock-month-sentiment></app-stock-month-sentiment>
-      </div>
-      <div class="col-sm">
-        <app-stock-month-sentiment></app-stock-month-sentiment>
-      </div>
-
-      <div class="col-sm">
-        <app-stock-month-sentiment></app-stock-month-sentiment>
+        <app-stock-month-sentiment
+          [monthlySentimentValue]="sentiment"
+        ></app-stock-month-sentiment>
       </div>
     </div>
 

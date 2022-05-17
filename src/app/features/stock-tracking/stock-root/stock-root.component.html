@@ -1,5 +1,7 @@
 <div class="container">
-  <app-stock-tracker></app-stock-tracker>
+  <app-stock-tracker
+    (symbolEvent$)="getRecentSymbolValue($event)"
+  ></app-stock-tracker>
   <router-outlet></router-outlet>
 
   <div *ngFor="let stockQuote of stocks; trackBy: trackByFn">

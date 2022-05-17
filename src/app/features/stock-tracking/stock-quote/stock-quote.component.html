@@ -1,36 +1,67 @@
-<div class="panel panel-default">
-  <button type="button" class="close" aria-label="Close" (click)="removeItem()">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div
+  class="panel panel-default"
+  style="border-color: #dddddd !important; border: 5px"
+>
   <div class="panel-heading">
     <h3 class="panel-title">Name here {{ currentQuoteValue?.name }}</h3>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="removeItem()"
+      style="position: relative; top: -31px; right: -604px"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <div class="panel-body">
     <div class="row">
-      <div class="col-sm">
-        Change today: {{ currentQuoteValue?.d | percent }}
+      <div class="col">
+        <div class="row">
+          <div class="col-sm">
+            Change today: {{ currentQuoteValue?.d | percent }}
+          </div>
+          <div class="col-sm">
+            Opening price: {{ currentQuoteValue?.o | currency }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm">
+            Current price: {{ currentQuoteValue?.c | currency }}
+          </div>
+          <div class="col-sm">
+            High price: {{ currentQuoteValue?.h | currency }}
+          </div>
+        </div>
       </div>
-      <div class="col-sm">
-        Opening price: {{ currentQuoteValue?.o | currency }}
+
+      <div class="col">
+        <div class="row">
+          <span
+            *ngIf="currentQuoteValue?.d > 0; else elseBlock"
+            style="font-size: 4em; color: green"
+            >&#42779;</span
+          >
+          <ng-template #elseBlock
+            ><span style="font-size: 4em; color: red">
+              &#42780;</span
+            ></ng-template
+          >
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm">
-        Current price: {{ currentQuoteValue?.c | currency }}
-      </div>
-      <div class="col-sm">
-        High price: {{ currentQuoteValue?.h | currency }}
-      </div>
+    <div>
+      <button
+        style="margin-top: 10px; margin-bottom: 10px"
+        type="button"
+        id="btnSave"
+        class="btn btn-primary pull-right"
+        (click)="navigateToStockDetails()"
+      >
+        Go to social sentiments details
+      </button>
     </div>
-
-    <button
-      type="button"
-      id="btnSave"
-      class="btn btn-primary pull-right"
-      (click)="navigateToStockDetails()"
-    >
-      Go to social sentiments details
-    </button>
   </div>
 </div>

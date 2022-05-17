@@ -1,0 +1,11 @@
+<ng-container>
+  <span
+    *ngIf="currentIndicatorValue > 0; else elseBlock"
+    style="font-size: 4em; color: green"
+    >&#42779;</span
+  >
+
+  <ng-template #elseBlock
+    ><span style="font-size: 4em; color: red"> &#42780;</span></ng-template
+  >
+</ng-container>

@@ -9,10 +9,6 @@ export class LocalStorageService {
 
   loadInitialState(): void {}
 
-  setItem(key: string, value: any) {
-    localStorage.setItem(`${key}`, JSON.stringify(value));
-  }
-
   getStocks() {
     return JSON.parse(localStorage.getItem(`${this.SYMBOLS_KEY}`) || '[]');
   }

@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { ArrowIndicatorComponent } from './arrow-indicator/arrow-indicator.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [ArrowIndicatorComponent],
+  imports: [CommonModule],
+  exports: [ArrowIndicatorComponent],
 })
-export class SharedModule { }
+export class SharedModule {}
