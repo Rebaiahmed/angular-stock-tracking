@@ -45,8 +45,8 @@ export class StockService {
   ): Observable<SentimentDataResponse> {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('symbol', symbol);
-    queryParams = queryParams.append('from', ' 2020-03-15');
-    queryParams = queryParams.append('to', '2020-06-15');
+    queryParams = queryParams.append('from', from);
+    queryParams = queryParams.append('to', to);
     return this.http.get<SentimentDataResponse>(
       this.apiUrl + '/stock/insider-sentiment',
       {

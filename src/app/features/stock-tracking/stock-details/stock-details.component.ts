@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SentimentDataResponse } from '../../../core/models/sentiment-data';
 import { StockService } from '../../../core/services/stock.service';
+import { formatDate } from '../../../core/utils/date-utils';
 
 @Component({
   selector: 'app-stock-details',
@@ -24,8 +25,10 @@ export class StockDetailsComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params) => {
-          const fromMonth = new Date().getMonth().toString();
-          const lastMonth = new Date().getMonth().toString();
+          let previousThreeMonth = new Date();
+          previousThreeMonth.setMonth(previousThreeMonth.getMonth() - 3);
+          const fromMonth = formatDate(previousThreeMonth);
+          const lastMonth = formatDate(new Date());
           return this.stockService.getStockSentimentData(
             params['symbol'],
             fromMonth,
@@ -41,5 +44,10 @@ export class StockDetailsComponent implements OnInit {
 
   backToListStock(): void {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -7,8 +7,8 @@ const routes: Routes = [
   {
     path: '',
     component: StockRootComponent,
-    children: [{ path: 'sentiment/:symbol', component: StockDetailsComponent }],
   },
+  { path: 'sentiment/:symbol', component: StockDetailsComponent },
 ];
 
 @NgModule({
