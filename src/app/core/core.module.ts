@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenHandlerInterceptor } from './interceptors/token-handler.interceptor';
-import { MinusPipe } from './pipes/minus.pipe';
 
 @NgModule({
-  declarations: [MinusPipe],
+  declarations: [],
   imports: [CommonModule, HttpClientModule],
   providers: [
     {
@@ -14,6 +13,6 @@ import { MinusPipe } from './pipes/minus.pipe';
       multi: true,
     },
   ],
-  exports: [MinusPipe],
+  exports: [],
 })
 export class CoreModule {}

@@ -20,7 +20,9 @@ export class StockQuoteComponent implements OnInit {
   ngOnInit(): void {}
 
   navigateToStockDetails(): void {
-    this.router.navigate(['/sentiment/' + this.currentQuoteValue?.symbol]);
+    this.router.navigate(['/sentiment/' + this.currentQuoteValue?.symbol], {
+      queryParams: { name: this.currentQuoteValue?.name },
+    });
   }
 
   removeItem(): void {

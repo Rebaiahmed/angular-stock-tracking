@@ -1,8 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { forkJoin, map, Subject, takeUntil, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { forkJoin, map, Subject, takeUntil } from 'rxjs';
 import { QuoteResponse } from '../../../core/models';
-import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { StockService } from '../../../core/services/stock.service';
+import { LocalStorageService, StockService } from '../../../core/services';
 
 @Component({
   selector: 'app-stock-root',
@@ -15,8 +14,7 @@ export class StockRootComponent implements OnInit {
 
   constructor(
     private readonly stockService: StockService,
-    private readonly localStorageService: LocalStorageService,
-    private cdr: ChangeDetectorRef
+    private readonly localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -24,24 +22,29 @@ export class StockRootComponent implements OnInit {
   }
 
   getRecentSymbolValue(stockSymbol: string) {
-    this.stockService
-      .getCompanyCurrentQuote(stockSymbol)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result) => {});
-    this.ngOnInit();
+    this.getStocksData();
   }
 
   getStocksData() {
     let stocks = this.localStorageService.getStocks();
-    forkJoin(
-      stocks.map((stockSymbol: string) => {
-        return this.stockService.getCompanyCurrentQuote(stockSymbol);
-      })
-    )
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result: QuoteResponse[]) => {
-        this.stocks = result;
-      });
+    stocks.map((stockSymbol) => {
+      return forkJoin(
+        this.stockService.getCompanyCurrentQuote(stockSymbol),
+        this.stockService.getMatchedCompanyName(stockSymbol)
+      )
+        .pipe(
+          map((element) => {
+            return {
+              ...element[0],
+              name: element[1],
+            } as QuoteResponse;
+          }),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((result) => {
+          this.stocks.push(result);
+        });
+    });
   }
 
   trackByFn(index, item) {
@@ -51,7 +54,6 @@ export class StockRootComponent implements OnInit {
   removeStock(symbol) {
     this.localStorageService.removeStock(symbol);
     this.getStocksData();
-    this.cdr.detectChanges();
     this.ngOnInit();
   }
 

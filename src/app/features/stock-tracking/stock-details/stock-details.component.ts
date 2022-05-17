@@ -14,6 +14,7 @@ import { formatDate } from '../../../shared/utils/date-utils';
 export class StockDetailsComponent implements OnInit {
   private destroy$ = new Subject<void>();
   currentQuoteSentiment: SentimentDataResponse;
+  currentStockName = '';
 
   constructor(
     private location: Location,
@@ -22,6 +23,7 @@ export class StockDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentStockName = this.route.snapshot.queryParamMap.get('name');
     this.route.params
       .pipe(
         switchMap((params) => {
