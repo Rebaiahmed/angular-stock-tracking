@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SentimentDataResponse } from '../../../core/models/sentiment-data';
 import { StockService } from '../../../core/services/stock.service';
-import { formatDate } from '../../../core/utils/date-utils';
+import { formatDate } from '../../../shared/utils/date-utils';
 
 @Component({
   selector: 'app-stock-details',

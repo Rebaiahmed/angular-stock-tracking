@@ -5,7 +5,6 @@ import { StockTrackingRoutingModule } from './stock-tracking-routing.module';
 import { StockRootComponent } from './stock-root/stock-root.component';
 import { StockTrackerComponent } from './stock-tracker/stock-tracker.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StockListComponent } from './stock-list/stock-list.component';
 import { StockQuoteComponent } from './stock-quote/stock-quote.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { StockMonthSentimentComponent } from './stock-month-sentiment/stock-month-sentiment.component';
@@ -15,7 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     StockRootComponent,
     StockTrackerComponent,
-    StockListComponent,
+
     StockQuoteComponent,
     StockDetailsComponent,
     StockMonthSentimentComponent,

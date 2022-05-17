@@ -27,9 +27,7 @@ export class StockRootComponent implements OnInit {
     this.stockService
       .getCompanyCurrentQuote(stockSymbol)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((result) => {
-        console.log('new quote', result);
-      });
+      .subscribe((result) => {});
     this.ngOnInit();
   }
 

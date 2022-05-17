@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { QuoteResponse, StockApiResponse } from '../models';
 import { SentimentDataResponse } from '../models/sentiment-data';
+import { monthNames } from '../../shared/utils/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -47,11 +48,22 @@ export class StockService {
     queryParams = queryParams.append('symbol', symbol);
     queryParams = queryParams.append('from', from);
     queryParams = queryParams.append('to', to);
-    return this.http.get<SentimentDataResponse>(
-      this.apiUrl + '/stock/insider-sentiment',
-      {
+    return this.http
+      .get<SentimentDataResponse>(this.apiUrl + '/stock/insider-sentiment', {
         params: queryParams,
-      }
-    );
+      })
+      .pipe(
+        map((response) => {
+          return {
+            symbol: response.symbol,
+            data: response.data.map((element) => {
+              return {
+                ...element,
+                month: monthNames[element.month],
+              };
+            }),
+          };
+        })
+      );
   }
 }

@@ -1,6 +1,6 @@
 export interface SentimentData {
   change: number;
-  month: number;
+  month: number | string;
   mspr: number;
   symbol: string;
   year: number;
