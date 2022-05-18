@@ -1,28 +1,15 @@
-# StockTracacker
+# Stock tracking app 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+This project was dedicated for the second part of getting Angular certificate level2
 
-## Development server
+# Best practises applied:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Lazy loading 
+- Cleau subscriptions 
+- Smart/Dumb component pattern 
+- OnPush added ad a detection 
+- UI componsned based and avoid single component pattern 
+- Short import with index.ts 
+- Project structure following the community standars 
+- Usage of available Angular APIS: interceptors,HttpClient, Pipes and custom pipes, services, models, Routing
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# angular-stock-tracking
