@@ -5,7 +5,7 @@ This project was dedicated for the second part of getting Angular certificate le
 # Best practises applied:
 
 - Lazy loading 
-- Cleau subscriptions 
+- Cleauup subscriptions 
 - Smart/Dumb component pattern 
 - OnPush added ad a detection 
 - UI componsned based and avoid single component pattern 
