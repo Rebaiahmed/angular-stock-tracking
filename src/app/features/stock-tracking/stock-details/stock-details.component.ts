@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, switchMap, takeUntil } from 'rxjs';
 import { SentimentDataResponse } from '../../../core/models/sentiment-data';
@@ -10,6 +10,7 @@ import { formatDate } from '../../../shared/utils/date-utils';
   selector: 'app-stock-details',
   templateUrl: './stock-details.component.html',
   styleUrls: ['./stock-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StockDetailsComponent implements OnInit {
   private destroy$ = new Subject<void>();

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { QuoteResponse } from '../../../core/models';
 
@@ -6,6 +13,7 @@ import { QuoteResponse } from '../../../core/models';
   selector: 'app-stock-quote',
   templateUrl: './stock-quote.component.html',
   styleUrls: ['./stock-quote.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StockQuoteComponent implements OnInit {
   @Output() removeStockEvent = new EventEmitter<string>();
