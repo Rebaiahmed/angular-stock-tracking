@@ -4,6 +4,8 @@
   ></app-stock-tracker>
   <router-outlet></router-outlet>
 
+  <div class="spinner-border text-primary" role="status" *ngIf="loading"></div>
+
   <div *ngFor="let stockQuote of stocks; trackBy: trackByFn">
     <app-stock-quote
       [quoteValue]="stockQuote"

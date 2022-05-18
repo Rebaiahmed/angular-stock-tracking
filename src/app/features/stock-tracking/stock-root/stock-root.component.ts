@@ -11,6 +11,7 @@ import { LocalStorageService, StockService } from '../../../core/services';
 export class StockRootComponent implements OnInit {
   private destroy$ = new Subject<void>();
   stocks: QuoteResponse[] = [];
+  loading = false;
 
   constructor(
     private readonly stockService: StockService,
@@ -26,6 +27,7 @@ export class StockRootComponent implements OnInit {
   }
 
   getStocksData() {
+    this.loading = true;
     let stocks = this.localStorageService.getStocks();
     stocks.map((stockSymbol) => {
       return forkJoin(
@@ -45,6 +47,7 @@ export class StockRootComponent implements OnInit {
           this.stocks.push(result);
         });
     });
+    this.loading = false;
   }
 
   trackByFn(index, item) {
@@ -52,13 +55,20 @@ export class StockRootComponent implements OnInit {
   }
 
   removeStock(symbol) {
+    const quoteIndex = this.stocks.findIndex(function (item) {
+      return item.symbol === symbol;
+    });
+
+    if (quoteIndex !== -1) {
+      this.stocks.splice(quoteIndex, 1);
+    }
     this.localStorageService.removeStock(symbol);
     this.getStocksData();
-    this.ngOnInit();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.stocks = [];
   }
 }

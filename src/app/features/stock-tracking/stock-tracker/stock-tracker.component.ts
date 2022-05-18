@@ -22,5 +22,6 @@ export class StockTrackerComponent implements OnInit {
   trackStock(): void {
     this.localStorageService.addNewStock(this.stockSearcher.value);
     this.symbolEvent$.emit(this.stockSearcher.value);
+    this.stockSearcher.reset();
   }
 }
