@@ -10,7 +10,6 @@ import { formatDate } from '../../../shared/utils/date-utils';
   selector: 'app-stock-details',
   templateUrl: './stock-details.component.html',
   styleUrls: ['./stock-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StockDetailsComponent implements OnInit {
   private destroy$ = new Subject<void>();

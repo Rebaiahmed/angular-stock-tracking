@@ -7,7 +7,7 @@
       <h3 class="panel-title">{{ currentStockName }}</h3>
     </div>
     <div class="panel-body">
-      <div class="row">
+      <div class="row" *ngIf="currentQuoteSentiment">
         <div
           class="col-sm"
           *ngFor="let sentiment of currentQuoteSentiment.data; let i = index"

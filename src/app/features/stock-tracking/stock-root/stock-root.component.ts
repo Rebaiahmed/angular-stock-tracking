@@ -28,25 +28,27 @@ export class StockRootComponent implements OnInit {
 
   getStocksData() {
     this.loading = true;
-    let stocks = this.localStorageService.getStocks();
-    stocks.map((stockSymbol) => {
+    let localStorageStocks = this.localStorageService.getStocks();
+    let stocks$ = localStorageStocks.map((stockSymbol) => {
       return forkJoin(
         this.stockService.getCompanyCurrentQuote(stockSymbol),
         this.stockService.getMatchedCompanyName(stockSymbol)
-      )
-        .pipe(
-          map((element) => {
-            return {
-              ...element[0],
-              name: element[1],
-            } as QuoteResponse;
-          }),
-          takeUntil(this.destroy$)
-        )
-        .subscribe((result) => {
-          this.stocks.push(result);
-        });
+      ).pipe(
+        map((element) => {
+          return {
+            ...element[0],
+            name: element[1],
+          } as QuoteResponse;
+        })
+      );
     });
+
+    forkJoin(stocks$)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result: QuoteResponse[]) => {
+        this.stocks = result;
+      });
+
     this.loading = false;
   }
 
