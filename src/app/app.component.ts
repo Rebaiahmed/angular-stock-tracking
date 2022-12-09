@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { flatten } from 'lodash';
+//import * as _ from 'lodash';
+import includes from 'lodash/includes';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,10 +11,7 @@ export class AppComponent {
   time: string;
 
   constructor() {
-    // Original array
-let array1 = [[1, 2], [4, 5], [7, 8]]
-// Using _.flatten() method
-let newArray = flatten(array1);
+    console.log((includes[ 'a'], 'b')); //lodash'includes package' usage
 
   }
 }

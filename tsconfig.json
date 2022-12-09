@@ -18,7 +18,13 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": ["es2020", "dom"]
+    "lib": ["es2020", "dom"],
+    "allowSyntheticDefaultImports": true,
+  "baseUrl": "./",
+  "typeRoots": ["node_modules/@types", "manual_typings"],
+  "paths": {
+    "lodash/*": ["node_modules/@types/lodash-es/*"]
+  }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
